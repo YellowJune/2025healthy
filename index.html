@@ -110,7 +110,14 @@
       transition: transform 0.2s ease;
     }
 
-    button:hover {
+    button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+    }
+
+    button:hover:enabled {
       transform: scale(1.05);
     }
 
@@ -137,7 +144,7 @@
       향후 검진의 질 향상을 위한 자료로 활용되오니 성의 있게 작성해주세요.
     </div>
 
-    <p><strong>1학년 (<input type="text" placeholder="반">)반</strong></p>
+    <p><strong>1학년 (<input id="classInput" type="text" placeholder="반" required>)반</strong></p>
 
     <div class="section-title">🩺 일반 건강검진</div>
     <table>
@@ -228,16 +235,27 @@
     </table>
 
     <div class="section-title">📣 불만족 또는 개선 희망 사항</div>
-    <textarea placeholder="불만족하거나 개선이 필요한 부분이 있다면 자유롭게 작성해주세요."></textarea>
+    <textarea id="feedbackInput" placeholder="불만족하거나 개선이 필요한 부분이 있다면 자유롭게 작성해주세요."></textarea>
 
     <div class="submit">
-      <button onclick="submitForm()">제출하기</button>
+      <button id="submitBtn" onclick="submitForm()">제출하기</button>
     </div>
   </div>
+
 <script>
   function submitForm() {
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+
+    const classValue = document.getElementById('classInput').value.trim();
+    if (!classValue) {
+      alert("반을 입력해주세요.");
+      btn.disabled = false;
+      return;
+    }
+
     const formData = {
-      class: document.querySelector('input[type="text"]').value,
+      class: classValue,
       gen1: getValue('gen1'),
       gen2: getValue('gen2'),
       gen3: getValue('gen3'),
@@ -246,10 +264,9 @@
       dent2: getValue('dent2'),
       dent3: getValue('dent3'),
       dent4: getValue('dent4'),
-      feedback: document.querySelector('textarea').value
+      feedback: document.getElementById('feedbackInput').value.trim()
     };
 
-    // Google Apps Script URL로 바꿔줘!
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyMI3_B78sPn-MtvGpbk3BbyPf1BmcvsDGocGRP7DIbD40_YLqQn1-MV7QSFMyk2kfCmA/exec';
 
     fetch(scriptURL, {
@@ -257,12 +274,20 @@
       body: JSON.stringify(formData),
       headers: { 'Content-Type': 'application/json' }
     })
-    .then(res => {
-      alert("제출이 완료되었습니다. 감사합니다!");
+    .then(response => {
+      if (!response.ok) throw new Error(`HTTP 오류! 상태 코드: ${response.status}`);
+      return response.text();
     })
-    .catch(err => {
-      alert("제출 중 오류가 발생했습니다. 다시 시도해주세요.");
-      console.error(err);
+    .then(result => {
+      alert("✅ 제출이 완료되었습니다. 감사합니다!");
+      resetForm();
+    })
+    .catch(error => {
+      alert("❌ 제출 중 오류가 발생했습니다. 다시 시도해주세요.");
+      console.error("제출 오류:", error);
+    })
+    .finally(() => {
+      btn.disabled = false;
     });
   }
 
@@ -270,6 +295,11 @@
     const checked = document.querySelector(`input[name="${name}"]:checked`);
     return checked ? checked.value : '';
   }
+
+  function resetForm() {
+    document.getElementById('classInput').value = '';
+    document.getElementById('feedbackInput').value = '';
+    const radios = document.querySelectorAll('input[type="radio"]');
+    radios.forEach(r => r.checked = false);
+  }
 </script>
-</body>
-</html>
