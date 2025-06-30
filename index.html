@@ -231,9 +231,45 @@
     <textarea placeholder="불만족하거나 개선이 필요한 부분이 있다면 자유롭게 작성해주세요."></textarea>
 
     <div class="submit">
-      <button type="submit">제출하기</button>
+      <button onclick="submitForm()">제출하기</button>
     </div>
   </div>
+<script>
+  function submitForm() {
+    const formData = {
+      class: document.querySelector('input[type="text"]').value,
+      gen1: getValue('gen1'),
+      gen2: getValue('gen2'),
+      gen3: getValue('gen3'),
+      gen4: getValue('gen4'),
+      dent1: getValue('dent1'),
+      dent2: getValue('dent2'),
+      dent3: getValue('dent3'),
+      dent4: getValue('dent4'),
+      feedback: document.querySelector('textarea').value
+    };
 
+    // Google Apps Script URL로 바꿔줘!
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyMI3_B78sPn-MtvGpbk3BbyPf1BmcvsDGocGRP7DIbD40_YLqQn1-MV7QSFMyk2kfCmA/exec';
+
+    fetch(scriptURL, {
+      method: 'POST',
+      body: JSON.stringify(formData),
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .then(res => {
+      alert("제출이 완료되었습니다. 감사합니다!");
+    })
+    .catch(err => {
+      alert("제출 중 오류가 발생했습니다. 다시 시도해주세요.");
+      console.error(err);
+    });
+  }
+
+  function getValue(name) {
+    const checked = document.querySelector(`input[name="${name}"]:checked`);
+    return checked ? checked.value : '';
+  }
+</script>
 </body>
 </html>
