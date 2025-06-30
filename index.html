@@ -238,7 +238,7 @@
     <textarea id="feedbackInput" placeholder="불만족하거나 개선이 필요한 부분이 있다면 자유롭게 작성해주세요."></textarea>
 
     <div class="submit">
-      <button id="submitBtn" onclick="submitForm()">제출하기</button>
+      <button type="button" id="submitBtn" onclick="submitForm()">제출하기</button>
     </div>
   </div>
 
@@ -265,7 +265,7 @@
       }
     }
 
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbwZMsO-n5dRSh8fHmiRNl0CkrK547Nv6xEBLi33F1EvexWHYK0_Bgv_SmG-am7IbxPrbA/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbygBN5Gjt6dqoQNqmtJfNZ4_Ltkn36jTHm0ySphd0Q4xFCvX_LcrBSp6qsvTy4gTwrhag/exec';
 
     fetch(scriptURL, {
       method: 'POST',
