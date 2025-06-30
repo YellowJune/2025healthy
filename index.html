@@ -1,168 +1,239 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>2025 건강검진기관 만족도 조사</title>
+  <meta charset="UTF-8" />
+  <title>2025 건강검진 만족도 조사</title>
   <style>
+    :root {
+      --main-color: #4caf50;
+      --light-bg: #f9f9f9;
+      --border-color: #e0e0e0;
+      --radius: 12px;
+      --font: "Segoe UI", "Apple SD Gothic Neo", sans-serif;
+    }
+
     body {
-      font-family: "맑은 고딕", sans-serif;
-      margin: 40px;
+      font-family: var(--font);
+      background: var(--light-bg);
+      color: #333;
+      margin: 0;
+      padding: 40px 20px;
+      line-height: 1.6;
     }
-    h1, h2 {
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    h1 {
       text-align: center;
-    }
-    .info {
+      font-size: 24px;
       margin-bottom: 20px;
-      font-size: 16px;
+      color: var(--main-color);
     }
+
+    .info {
+      font-size: 15px;
+      background: #f2f2f2;
+      padding: 15px;
+      border-radius: var(--radius);
+      margin-bottom: 30px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      margin: 30px 0 10px;
+      font-weight: bold;
+      color: #222;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
-      margin: 20px 0;
+      margin-top: 10px;
     }
+
     th, td {
-      border: 1px solid #333;
-      padding: 8px;
+      border: 1px solid var(--border-color);
+      padding: 10px;
       text-align: center;
     }
+
     th {
-      background-color: #f2f2f2;
+      background: #f5f5f5;
+      font-weight: 600;
     }
-    label {
-      margin: 0 5px;
+
+    input[type="radio"] {
+      transform: scale(1.2);
     }
+
+    input[type="text"] {
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      width: 60px;
+      font-size: 15px;
+      text-align: center;
+    }
+
     textarea {
       width: 100%;
-      height: 120px;
-      margin-top: 10px;
+      border-radius: var(--radius);
+      padding: 12px;
       font-size: 14px;
-      padding: 10px;
+      border: 1px solid #ccc;
+      margin-top: 10px;
+      resize: vertical;
     }
-    .section-title {
-      font-size: 18px;
-      margin-top: 40px;
-      font-weight: bold;
-    }
+
     .submit {
-      margin-top: 30px;
       text-align: center;
+      margin-top: 30px;
     }
+
     button {
-      padding: 10px 20px;
-      font-size: 16px;
-      border: none;
-      background-color: #4CAF50;
+      padding: 12px 30px;
+      background: linear-gradient(to right, #43e97b, #38f9d7);
       color: white;
-      border-radius: 6px;
+      font-weight: bold;
+      border: none;
+      border-radius: 30px;
+      font-size: 16px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.1);
       cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 600px) {
+      th, td {
+        font-size: 12px;
+        padding: 6px;
+      }
+
+      h1 {
+        font-size: 20px;
+      }
     }
   </style>
 </head>
 <body>
 
-<h1>2025학년도 1학년 학생 건강검진기관 만족도 조사</h1>
-<p class="info">
-  📅 <strong>검진일자:</strong> 2025년 6월 12일<br>
-  본 설문조사는 지난 건강검진기관(구미강동병원)에 대한 만족도를 파악하기 위한 것입니다.<br>
-  향후 검진의 질 향상을 위한 자료로 활용되오니 성의 있게 작성해 주세요.
-</p>
+  <div class="container">
+    <h1>2025학년도 1학년 건강검진기관 만족도 조사</h1>
+    
+    <div class="info">
+      📅 <strong>검진일자:</strong> 2025년 6월 12일<br/>
+      본 설문조사는 건강검진기관(구미강동병원)의 만족도 조사를 위한 것입니다.<br/>
+      향후 검진의 질 향상을 위한 자료로 활용되오니 성의 있게 작성해주세요.
+    </div>
 
-<div class="info"><strong>1학년 (<input type="text" style="width: 50px;">)반</strong></div>
+    <p><strong>1학년 (<input type="text" placeholder="반">)반</strong></p>
 
-<div class="section-title">🩺 일반 건강검진</div>
-<table>
-  <tr>
-    <th>문항</th>
-    <th>매우만족</th>
-    <th>만족</th>
-    <th>보통</th>
-    <th>불만</th>
-    <th>매우불만</th>
-  </tr>
-  <tr>
-    <td>1. 진료 및 검사 내용 만족도</td>
-    <td><input type="radio" name="gen1" value="5"></td>
-    <td><input type="radio" name="gen1" value="4"></td>
-    <td><input type="radio" name="gen1" value="3"></td>
-    <td><input type="radio" name="gen1" value="2"></td>
-    <td><input type="radio" name="gen1" value="1"></td>
-  </tr>
-  <tr>
-    <td>2. 출장 검진 기관 직원의 친절도</td>
-    <td><input type="radio" name="gen2" value="5"></td>
-    <td><input type="radio" name="gen2" value="4"></td>
-    <td><input type="radio" name="gen2" value="3"></td>
-    <td><input type="radio" name="gen2" value="2"></td>
-    <td><input type="radio" name="gen2" value="1"></td>
-  </tr>
-  <tr>
-    <td>3. 검진 방법(출장검진)에 대한 만족도</td>
-    <td><input type="radio" name="gen3" value="5"></td>
-    <td><input type="radio" name="gen3" value="4"></td>
-    <td><input type="radio" name="gen3" value="3"></td>
-    <td><input type="radio" name="gen3" value="2"></td>
-    <td><input type="radio" name="gen3" value="1"></td>
-  </tr>
-  <tr>
-    <td>4. 종합적인 만족도</td>
-    <td><input type="radio" name="gen4" value="5"></td>
-    <td><input type="radio" name="gen4" value="4"></td>
-    <td><input type="radio" name="gen4" value="3"></td>
-    <td><input type="radio" name="gen4" value="2"></td>
-    <td><input type="radio" name="gen4" value="1"></td>
-  </tr>
-</table>
+    <div class="section-title">🩺 일반 건강검진</div>
+    <table>
+      <tr>
+        <th>문항</th>
+        <th>매우만족</th>
+        <th>만족</th>
+        <th>보통</th>
+        <th>불만</th>
+        <th>매우불만</th>
+      </tr>
+      <tr>
+        <td>1. 진료 및 검사 내용 만족도</td>
+        <td><input type="radio" name="gen1" value="5"></td>
+        <td><input type="radio" name="gen1" value="4"></td>
+        <td><input type="radio" name="gen1" value="3"></td>
+        <td><input type="radio" name="gen1" value="2"></td>
+        <td><input type="radio" name="gen1" value="1"></td>
+      </tr>
+      <tr>
+        <td>2. 출장 검진 기관 직원의 친절도</td>
+        <td><input type="radio" name="gen2" value="5"></td>
+        <td><input type="radio" name="gen2" value="4"></td>
+        <td><input type="radio" name="gen2" value="3"></td>
+        <td><input type="radio" name="gen2" value="2"></td>
+        <td><input type="radio" name="gen2" value="1"></td>
+      </tr>
+      <tr>
+        <td>3. 검진 방법(출장검진)에 대한 만족도</td>
+        <td><input type="radio" name="gen3" value="5"></td>
+        <td><input type="radio" name="gen3" value="4"></td>
+        <td><input type="radio" name="gen3" value="3"></td>
+        <td><input type="radio" name="gen3" value="2"></td>
+        <td><input type="radio" name="gen3" value="1"></td>
+      </tr>
+      <tr>
+        <td>4. 종합적인 만족도</td>
+        <td><input type="radio" name="gen4" value="5"></td>
+        <td><input type="radio" name="gen4" value="4"></td>
+        <td><input type="radio" name="gen4" value="3"></td>
+        <td><input type="radio" name="gen4" value="2"></td>
+        <td><input type="radio" name="gen4" value="1"></td>
+      </tr>
+    </table>
 
-<div class="section-title">🦷 구강 건강검진</div>
-<table>
-  <tr>
-    <th>문항</th>
-    <th>매우만족</th>
-    <th>만족</th>
-    <th>보통</th>
-    <th>불만</th>
-    <th>매우불만</th>
-  </tr>
-  <tr>
-    <td>1. 진료 및 검사 내용 만족도</td>
-    <td><input type="radio" name="dent1" value="5"></td>
-    <td><input type="radio" name="dent1" value="4"></td>
-    <td><input type="radio" name="dent1" value="3"></td>
-    <td><input type="radio" name="dent1" value="2"></td>
-    <td><input type="radio" name="dent1" value="1"></td>
-  </tr>
-  <tr>
-    <td>2. 출장 검진 기관 직원의 친절도</td>
-    <td><input type="radio" name="dent2" value="5"></td>
-    <td><input type="radio" name="dent2" value="4"></td>
-    <td><input type="radio" name="dent2" value="3"></td>
-    <td><input type="radio" name="dent2" value="2"></td>
-    <td><input type="radio" name="dent2" value="1"></td>
-  </tr>
-  <tr>
-    <td>3. 검진 방법(출장검진)에 대한 만족도</td>
-    <td><input type="radio" name="dent3" value="5"></td>
-    <td><input type="radio" name="dent3" value="4"></td>
-    <td><input type="radio" name="dent3" value="3"></td>
-    <td><input type="radio" name="dent3" value="2"></td>
-    <td><input type="radio" name="dent3" value="1"></td>
-  </tr>
-  <tr>
-    <td>4. 종합적인 만족도</td>
-    <td><input type="radio" name="dent4" value="5"></td>
-    <td><input type="radio" name="dent4" value="4"></td>
-    <td><input type="radio" name="dent4" value="3"></td>
-    <td><input type="radio" name="dent4" value="2"></td>
-    <td><input type="radio" name="dent4" value="1"></td>
-  </tr>
-</table>
+    <div class="section-title">🦷 구강 건강검진</div>
+    <table>
+      <tr>
+        <th>문항</th>
+        <th>매우만족</th>
+        <th>만족</th>
+        <th>보통</th>
+        <th>불만</th>
+        <th>매우불만</th>
+      </tr>
+      <tr>
+        <td>1. 진료 및 검사 내용 만족도</td>
+        <td><input type="radio" name="dent1" value="5"></td>
+        <td><input type="radio" name="dent1" value="4"></td>
+        <td><input type="radio" name="dent1" value="3"></td>
+        <td><input type="radio" name="dent1" value="2"></td>
+        <td><input type="radio" name="dent1" value="1"></td>
+      </tr>
+      <tr>
+        <td>2. 출장 검진 기관 직원의 친절도</td>
+        <td><input type="radio" name="dent2" value="5"></td>
+        <td><input type="radio" name="dent2" value="4"></td>
+        <td><input type="radio" name="dent2" value="3"></td>
+        <td><input type="radio" name="dent2" value="2"></td>
+        <td><input type="radio" name="dent2" value="1"></td>
+      </tr>
+      <tr>
+        <td>3. 검진 방법(출장검진)에 대한 만족도</td>
+        <td><input type="radio" name="dent3" value="5"></td>
+        <td><input type="radio" name="dent3" value="4"></td>
+        <td><input type="radio" name="dent3" value="3"></td>
+        <td><input type="radio" name="dent3" value="2"></td>
+        <td><input type="radio" name="dent3" value="1"></td>
+      </tr>
+      <tr>
+        <td>4. 종합적인 만족도</td>
+        <td><input type="radio" name="dent4" value="5"></td>
+        <td><input type="radio" name="dent4" value="4"></td>
+        <td><input type="radio" name="dent4" value="3"></td>
+        <td><input type="radio" name="dent4" value="2"></td>
+        <td><input type="radio" name="dent4" value="1"></td>
+      </tr>
+    </table>
 
-<div class="section-title">📣 불만족 또는 개선 희망 사항</div>
-<textarea placeholder="불만족하거나 개선이 필요한 부분이 있다면 자유롭게 작성해주세요."></textarea>
+    <div class="section-title">📣 불만족 또는 개선 희망 사항</div>
+    <textarea placeholder="불만족하거나 개선이 필요한 부분이 있다면 자유롭게 작성해주세요."></textarea>
 
-<div class="submit">
-  <button type="submit">제출하기</button>
-</div>
+    <div class="submit">
+      <button type="submit">제출하기</button>
+    </div>
+  </div>
 
 </body>
 </html>
