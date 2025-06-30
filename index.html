@@ -245,7 +245,7 @@
 <script>
   function submitForm() {
     const formData = {
-      class: document.querySelector('input[type="text"]').value.trim(),
+      class: document.querySelector('input[type="text"]').value,
       gen1: getValue('gen1'),
       gen2: getValue('gen2'),
       gen3: getValue('gen3'),
@@ -254,28 +254,18 @@
       dent2: getValue('dent2'),
       dent3: getValue('dent3'),
       dent4: getValue('dent4'),
-      feedback: document.querySelector('textarea').value.trim()
+      feedback: document.querySelector('textarea').value
     };
 
-    // ✅ 필수 응답 항목 누락 체크
-    const missingFields = [];
-    if (!formData.class) missingFields.push("반 정보");
-    if (!formData.gen1) missingFields.push("일반검진 1번");
-    if (!formData.gen2) missingFields.push("일반검진 2번");
-    if (!formData.gen3) missingFields.push("일반검진 3번");
-    if (!formData.gen4) missingFields.push("일반검진 4번");
-    if (!formData.dent1) missingFields.push("구강검진 1번");
-    if (!formData.dent2) missingFields.push("구강검진 2번");
-    if (!formData.dent3) missingFields.push("구강검진 3번");
-    if (!formData.dent4) missingFields.push("구강검진 4번");
-
-    if (missingFields.length > 0) {
-      alert("⚠️ 다음 항목을 모두 입력해주세요:\n\n- " + missingFields.join("\n- "));
-      return;
+    // 필수값 체크
+    for (let key in formData) {
+      if (formData[key] === '') {
+        alert("모든 문항을 빠짐없이 입력해주세요.");
+        return;
+      }
     }
 
-    // ✅ Google Apps Script URL 넣기
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbzyhx2DhH0DK_97D621byKc2KqFs00_FXwmCe1AwZvBuDf9VmC1Sud5-zYs5DRRXLuUoA/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwZMsO-n5dRSh8fHmiRNl0CkrK547Nv6xEBLi33F1EvexWHYK0_Bgv_SmG-am7IbxPrbA/exec';
 
     fetch(scriptURL, {
       method: 'POST',
@@ -283,18 +273,15 @@
       headers: { 'Content-Type': 'application/json' }
     })
     .then(res => {
-      if (!res.ok) throw new Error("네트워크 응답 오류");
-
+      if (!res.ok) throw new Error("서버 오류");
+      return res.text();
+    })
+    .then(text => {
       alert("✅ 제출이 완료되었습니다. 감사합니다!");
-
-      // 폼 초기화
-      document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
-      document.querySelector('input[type="text"]').value = "";
-      document.querySelector('textarea').value = "";
     })
     .catch(err => {
-      alert("🚨 제출 중 오류가 발생했습니다. 다시 시도해주세요.");
-      console.error("제출 오류:", err);
+      alert("❌ 제출 중 오류가 발생했습니다. 다시 시도해주세요.");
+      console.error("[제출 오류]", err);
     });
   }
 
